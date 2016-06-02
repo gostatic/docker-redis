@@ -1,0 +1,13 @@
+build:
+	docker build -t gostatic/redis .
+
+run-slave:
+	docker run -ti --env-file .env -a STDIN -a STDOUT --rm gostatic/redis redis-server /usr/local/etc/redis/redis-slave.conf
+run-slave-shell:
+	docker run -ti --env-file .env -a STDIN -a STDOUT --rm gostatic/redis sh
+
+run-master:
+	docker run -ti --env-file .env -a STDIN -a STDOUT --rm gostatic/redis redis-server /usr/local/etc/redis/redis-master.conf
+
+push:
+	docker push gostatic/redis
