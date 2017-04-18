@@ -1,4 +1,4 @@
-FROM redis:3.0.7-alpine
+FROM redis:3.2.8-alpine
 
 COPY *.conf /usr/local/etc/redis/
 COPY *.sh /usr/local/bin/
