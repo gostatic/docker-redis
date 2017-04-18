@@ -1,4 +1,4 @@
-# Docker Image: gostatic/redis
+# Docker Image: containerdb/redis
 
 The main purpose of this image is to support password protected master/slave redis with minimal configuration.
 
