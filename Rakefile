@@ -69,12 +69,19 @@ task :push, [:version] do |_t, args|
   end
 end
 
-desc 'Run version via interactive Docker'
-task :run, [:version, :port] do |_t, args|
+desc 'Run version via interactive docker console'
+task :run, [:version, :port, :role] do |_t, args|
   raise "Please specify a version" unless (args.version && args.version != '')
   raise "Unknown version" unless VERSIONS.include?(args.version)
   args.with_defaults(
     port: '16379',
+    role: 'master',
   )
-  run_system_command("docker run -ti -a STDOUT -p #{args.port}:16379 -e \"REDIS_PASS=S3CU4E\" gostatic/redis:#{args.version}")
+  run_system_command([
+    "docker run -ti -p 16379:#{args.port}",
+    "-v /tmp/gostatic-redis-#{args.role}:/data",
+    "-e \"REDIS_PASS=S3CU4E\"",
+    "gostatic/redis:#{args.version}",
+    "redis-server /usr/local/etc/redis/redis-#{args.role}.conf",
+  ].join(' '))
 end
