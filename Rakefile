@@ -85,3 +85,11 @@ task :run, [:version, :port, :role] do |_t, args|
     "redis-server /usr/local/etc/redis/redis-#{args.role}.conf",
   ].join(' '))
 end
+
+desc 'Cleanup temporary compiled file'
+task :cleanup do
+  files = Dir.glob('Dockerfile-*')
+  files.each do |file|
+    File.delete(file)
+  end
+end
