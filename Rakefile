@@ -10,11 +10,13 @@ VERSIONS = [
 
 def run_system_command(command)
   puts "  \e[33m#{command}\e[0m"
+  print "    \e[1;34m"
   IO.popen(command) do |io|
     while line = io.gets do
-      puts "    \e[1;34m#{line.strip}\e[0m"
+      print line.gsub("\n", "\n    ")
     end
   end
+  puts "\e[0m"
 end
 
 def build_version(version)
