@@ -1,6 +1,6 @@
 require 'erb'
 
-IMAGE_NAME = "gostatic/redis"
+IMAGE_NAME = "containerdb/redis"
 VERSIONS = [
   '3.2.11',
   '3.2.11-alpine',
@@ -79,9 +79,9 @@ task :run, [:version, :port, :role] do |_t, args|
   )
   run_system_command([
     "docker run -ti -p 16379:#{args.port}",
-    "-v /tmp/gostatic-redis-#{args.role}:/data",
+    "-v /tmp/#{IMAGE_NAME.replace('/', '-')}-#{args.role}:/data",
     "-e \"REDIS_PASS=S3CU4E\"",
-    "gostatic/redis:#{args.version}",
+    "#{IMAGE_NAME}:#{args.version}",
     "redis-server /usr/local/etc/redis/redis-#{args.role}.conf",
   ].join(' '))
 end
