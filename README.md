@@ -8,8 +8,8 @@ Not all upstream versions are supported. We only tend to support Ubuntu (for com
 
 - 3.2.11
 - 3.2.11-alpine
-- 4.0.2
-- 4.0.2-alpine
+- 4.0.14
+- 4.0.14-alpine
 
 
 ## Configuration

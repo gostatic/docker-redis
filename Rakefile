@@ -4,8 +4,8 @@ IMAGE_NAME = "gostatic/redis"
 VERSIONS = [
   '3.2.11',
   '3.2.11-alpine',
-  '4.0.2',
-  '4.0.2-alpine',
+  '4.0.14',
+  '4.0.14-alpine',
 ]
 
 def run_system_command(command)
