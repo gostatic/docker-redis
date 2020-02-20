@@ -3,9 +3,15 @@ set -e
 
 echo "ENTRY"
 
-if [[ "$REDIS_MASTERAUTH" != "" ]]; then
+MASTER_HOST=${REDIS_MASTER_HOST:-redis-master}
+MASTER_PORT=${REDIS_MASTER_PORT:-6379}
+
+echo "=> Setting master connection details in /usr/local/etc/redis/redis-slave.conf"
+echo  "slaveof ${MASTER_HOST} ${MASTER_PORT}" >> /usr/local/etc/redis/redis-slave.conf
+
+if [[ "$REDIS_MASTER_AUTH" != "" ]]; then
   echo "=> Using authentication for redis-master"
-  echo "masterauth $REDIS_MASTERAUTH" >> /usr/local/etc/redis/redis-slave.conf
+  echo "masterauth $REDIS_MASTER_AUTH" >> /usr/local/etc/redis/redis-slave.conf
 fi
 
 if [[ "$REDIS_PASS" != "" ]]; then
